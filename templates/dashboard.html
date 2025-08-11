@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Dashboard</h1>
+    <div class="card-container">
+        <a href="{{ url_for('list_clients') }}" class="card-link">
+            <div class="card"><h3>Total Clients</h3><p class="value">{{ client_count }}</p></div>
+        </a>
+        <a href="{{ url_for('track_policies') }}" class="card-link">
+            <div class="card"><h3>Upcoming Renewals (30 Days)</h3><p class="value">{{ upcoming_policy_count }}</p></div>
+        </a>
+    </div>
+{% endblock %}

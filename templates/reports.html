@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Business Reports</h1>
+    <div class="card-container">
+        <div class="card">
+            <h3>Total Premium Collected (All Time)</h3>
+            <p class="value">₹{{ "%.2f"|format(total_premium) }}</p>
+        </div>
+    </div>
+{% endblock %}

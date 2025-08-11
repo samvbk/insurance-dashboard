@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Birthdays</h1>
+    <h2>Today's Birthdays</h2>
+    {% if todays_birthdays %}
+        <table>
+            <thead><tr><th>Name</th><th>Action</th></tr></thead>
+            <tbody>
+            {% for client in todays_birthdays %}
+                <tr>
+                    <td><a href="{{ url_for('client_detail', client_id=client.id) }}">{{ client.name }}</a></td>
+                    <td><a href="mailto:{{ client.email }}?subject=Happy Birthday, {{ client.name }}!&body=Dear {{ client.name }},%0D%0A%0D%0AWishing you a very happy birthday and a wonderful year ahead!%0D%0A%0D%0ABest Regards" class="button">Send Wish</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}<p>No birthdays today.</p>{% endif %}
+
+    <h2 style="margin-top: 30px;">Upcoming Birthdays (Next 7 Days)</h2>
+    {% if upcoming_birthdays %}
+        <table>
+            <thead><tr><th>Date</th><th>Name</th></tr></thead>
+            <tbody>
+            {% for item in upcoming_birthdays %}
+                <tr>
+                    <td>{{ item.date.strftime('%A, %d-%b') }}</td>
+                    <td><a href="{{ url_for('client_detail', client_id=item.client.id) }}">{{ item.client.name }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}<p>No upcoming birthdays in the next week.</p>{% endif %}
+{% endblock %}

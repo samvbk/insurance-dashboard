@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Rename Document</h2>
+  <p>You are renaming the document: <strong>{{ doc.filename }}</strong></p>
+  
+  <form method="post">
+    <label for="filename">New Filename:</label>
+    <input type="text" id="filename" name="filename" value="{{ doc.filename }}" required>
+
+    <button type="submit">Save Changes</button>
+  </form>
+{% endblock %}

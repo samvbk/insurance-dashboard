@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Add New Client</h2>
+  <form method="post">
+    <label for="name">Name:</label><input type="text" id="name" name="name" required>
+    <label for="phone">Phone:</label><input type="tel" id="phone" name="phone">
+    <label for="email">Email:</label><input type="email" id="email" name="email">
+    <label for="address">Address:</label><textarea id="address" name="address"></textarea>
+    <label for="dob">Date of Birth:</label><input type="date" id="dob" name="dob">
+    <label for="has_nominee">Add Nominee?</label>
+    <select id="has_nominee" name="has_nominee">
+        <option value="no" selected>No</option><option value="yes">Yes</option>
+    </select>
+    <div id="nominee_details" class="sub-form" style="display:none;">
+        <label for="nominee_name">Nominee Name:</label><input type="text" id="nominee_name" name="nominee_name">
+        <label for="nominee_dob">Nominee Date of Birth:</label><input type="date" id="nominee_dob" name="nominee_dob">
+    </div>
+    <button type="submit">Save Client</button>
+  </form>
+  <script>
+    document.getElementById('has_nominee').addEventListener('change', function() {
+        document.getElementById('nominee_details').style.display = this.value === 'yes' ? 'block' : 'none';
+    });
+  </script>
+{% endblock %}

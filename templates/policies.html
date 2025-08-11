@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="header-with-action"><h1>Manage Policies</h1></div>
+    <form method="get" class="search-form">
+        <input type="text" name="search" placeholder="Search by policy number..." value="{{ search_query or '' }}">
+        <button type="submit">Search</button>
+    </form>
+    <table>
+        <thead><tr><th>Policy Number</th><th>Client Name</th><th>Insurance Co.</th><th>Premium</th><th>End Date</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for policy in policies %}
+            <tr>
+                <td>{{ policy.policy_number or 'N/A' }}</td>
+                <td>{{ policy.client_name }}</td>
+                <td>{{ policy.insurance_company or 'N/A' }}</td>
+                <td>₹{{ "%.2f"|format(policy.premium) }}</td>
+                <td>{{ policy.policy_end_date or 'N/A' }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('edit_policy', policy_id=policy.id) }}" class="action-link edit">Edit</a>
+                    <form action="{{ url_for('delete_policy', policy_id=policy.id) }}" method="post" onsubmit="return confirm('Are you sure?');">
+                        <button type="submit" class="action-link delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="empty-cell">No policies found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

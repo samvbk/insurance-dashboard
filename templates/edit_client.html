@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Edit Client</h2>
+  <form method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ client.name }}" required>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" value="{{ client.phone or '' }}">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="{{ client.email or '' }}">
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address">{{ client.address or '' }}</textarea>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" value="{{ client.dob or '' }}">
+
+    <label for="has_nominee">Add Nominee?</label>
+    <select id="has_nominee" name="has_nominee">
+        <option value="no" {% if not client.nominee_name %}selected{% endif %}>No</option>
+        <option value="yes" {% if client.nominee_name %}selected{% endif %}>Yes</option>
+    </select>
+    
+    <div id="nominee_details" class="sub-form" {% if not client.nominee_name %}style="display:none;"{% endif %}>
+        <label for="nominee_name">Nominee Name:</label>
+        <input type="text" id="nominee_name" name="nominee_name" value="{{ client.nominee_name or '' }}">
+        
+        <label for="nominee_dob">Nominee Date of Birth:</label>
+        <input type="date" id="nominee_dob" name="nominee_dob" value="{{ client.nominee_dob or '' }}">
+    </div>
+
+    <button type="submit">Update Client</button>
+  </form>
+
+  <script>
+    document.getElementById('has_nominee').addEventListener('change', function() {
+        var nomineeDetails = document.getElementById('nominee_details');
+        var nomineeName = document.getElementById('nominee_name');
+        var nomineeDob = document.getElementById('nominee_dob');
+
+        if (this.value === 'yes') {
+            nomineeDetails.style.display = 'block';
+        } else {
+            nomineeDetails.style.display = 'none';
+            // Optionally clear the fields when hiding
+            nomineeName.value = '';
+            nomineeDob.value = '';
+        }
+    });
+  </script>
+{% endblock %}

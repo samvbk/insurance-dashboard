@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Edit Agency</h2>
+  <form method="post">
+    <label for="name">Agency Name:</label>
+    <input type="text" id="name" name="name" value="{{ agency.name }}" required>
+    <button type="submit">Update Agency</button>
+  </form>
+{% endblock %}

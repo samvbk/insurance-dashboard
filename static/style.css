@@ -1,0 +1,57 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-color: #2c3e50; --secondary-color: #3498db; --light-gray: #ecf0f1;
+    --dark-gray: #bdc3c7; --text-color: #34495e; --bg-color: #f4f6f9; --white: #ffffff;
+    --danger-color: #e74c3c; --success-color: #2ecc71; --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Lato', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+.container { display: flex; }
+/* --- Sidebar Navigation --- */
+.sidebar { width: 250px; background-color: var(--primary-color); color: var(--white); min-height: 100vh; padding-top: 20px; }
+.sidebar-header h3 { text-align: center; margin-bottom: 30px; font-size: 1.5rem; }
+.sidebar ul { list-style-type: none; }
+.sidebar ul li a { display: block; color: var(--light-gray); text-decoration: none; padding: 15px 20px; transition: background-color 0.3s, color 0.3s; }
+.sidebar ul li a:hover, .sidebar ul li a.active { background-color: var(--secondary-color); color: var(--white); }
+/* --- Main Content Area --- */
+.main-content { flex-grow: 1; padding: 30px; }
+h1, h2 { margin-bottom: 20px; color: var(--primary-color); }
+.header-with-action { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+/* --- Card Component --- */
+.card-container { display: flex; gap: 20px; flex-wrap: wrap; align-items: stretch; }
+.card { background-color: var(--white); border-radius: 8px; box-shadow: var(--shadow); padding: 30px; flex: 1; min-width: 280px; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+.card-link { text-decoration: none; color: inherit; }
+.card-link .card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.card h3 { margin-bottom: 10px; font-size: 1.1rem; color: var(--text-color); }
+.card .value { font-size: 2rem; font-weight: 700; color: var(--secondary-color); }
+/* --- Table Styles --- */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: var(--shadow); }
+table thead { background-color: var(--primary-color); color: var(--white); }
+table th, table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--light-gray); vertical-align: middle; }
+table tbody tr { background-color: var(--white); }
+table tbody tr:nth-of-type(even) { background-color: var(--bg-color); }
+table tbody tr:hover { background-color: #dbeaf5; }
+td.actions { display: flex; align-items: center; gap: 15px; white-space: nowrap; }
+.empty-cell { text-align: center; padding: 2rem; color: #777; }
+/* --- Form and Button Styles --- */
+form { background-color: var(--white); padding: 25px; border-radius: 8px; box-shadow: var(--shadow); max-width: 600px; }
+form label { display: block; margin-bottom: 8px; font-weight: 700; }
+form input[type="text"], form input[type="tel"], form input[type="email"], form input[type="number"], form input[type="date"], form textarea, form select { width: 100%; padding: 10px; border: 1px solid var(--dark-gray); border-radius: 4px; margin-bottom: 20px; }
+form textarea { min-height: 100px; resize: vertical; }
+.button, button[type="submit"] { display: inline-block; background-color: var(--secondary-color); color: var(--white); padding: 10px 20px; border: none; border-radius: 4px; text-decoration: none; font-size: 1rem; cursor: pointer; transition: background-color 0.3s; }
+.button:hover, button[type="submit"]:hover { background-color: #2980b9; }
+.action-link { color: var(--secondary-color); font-weight: 700; text-decoration: none; background: none; border: none; padding: 0; font-family: inherit; font-size: inherit; cursor: pointer; }
+.action-link.edit { color: #f39c12; }
+.action-link.delete { color: var(--danger-color); }
+.action-link:hover { text-decoration: underline; }
+.sub-form { margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem; }
+/* --- Search Form --- */
+.search-form { background: none; box-shadow: none; padding: 0; display: flex; margin-top: 1rem; margin-bottom: 1rem; max-width: 400px; }
+.search-form input { margin-bottom: 0; }
+.search-form button { border-radius: 0 4px 4px 0; }
+.search-form input { border-right: none; border-radius: 4px 0 0 4px; }
+/* --- Flash Messages --- */
+.flash-messages { margin-bottom: 20px; }
+.flash { padding: 15px; border-radius: 4px; color: var(--white); margin-bottom: 10px; }
+.flash.success { background-color: var(--success-color); }
+.flash.danger { background-color: var(--danger-color); }

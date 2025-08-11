@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div style="margin-bottom: 2rem;">
+        <h1>{{ client.name }}</h1>
+        <p><strong>Phone:</strong> {{ client.phone or 'N/A' }}</p>
+        <p><strong>Email:</strong> {{ client.email or 'N/A' }}</p>
+    </div>
+
+    <div style="margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Policies</h2>
+            <a href="{{ url_for('add_policy', client_id=client.id) }}" class="button">Add Policy</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Policy Number</th>
+                    <th>Premium</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for policy in policies %}
+                <tr>
+                    <td>{{ policy.policy_number or 'N/A' }}</td>
+                    <td>₹{{ "%.2f"|format(policy.premium) }}</td>
+                    <td>{{ policy.policy_end_date or 'N/A' }}</td>
+                    <td class="actions">
+                        <a href="{{ url_for('edit_policy', policy_id=policy.id) }}" class="action-link edit">Edit</a>
+                        <form action="{{ url_for('delete_policy', policy_id=policy.id) }}" method="post" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this policy?');">
+                            <button type="submit" class="action-link delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4" style="text-align:center; padding: 1rem;">No policies found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h2>Documents</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doc in documents %}
+                <tr>
+                    <td>{{ doc.filename }}</td>
+                    <td class="actions">
+                        <a href="{{ url_for('view_document', client_id=client.id, filename=doc.filename) }}" target="_blank" class="action-link">View</a>
+                        <a href="{{ url_for('edit_document', doc_id=doc.id) }}" class="action-link edit">Edit</a>
+                        <form action="{{ url_for('delete_document', doc_id=doc.id) }}" method="post" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this document?');">
+                           <button type="submit" class="action-link delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="2" style="text-align:center; padding: 1rem;">No documents uploaded.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="{{ url_for('upload_document', client_id=client.id) }}" method="post" enctype="multipart/form-data" style="margin-top: 1rem; padding: 0; box-shadow: none;">
+            <input type="file" name="document" required>
+            <button type="submit">Upload Document</button>
+        </form>
+    </div>
+{% endblock %}

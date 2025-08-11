@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Upcoming Renewals (Next 30 Days)</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Premium Due</th>
+                <th>Due Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for renewal in renewals %}
+            <tr>
+                <td>{{ renewal.client_name }}</td>
+                <td>₹{{ "%.2f"|format(renewal.premium) }}</td>
+                <td>{{ renewal.due_date }}</td>
+                <td>
+                    <a href="{{ url_for('client_detail', client_id=renewal.client_id) }}" class="action-link">View Details</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 2rem;">No upcoming renewals found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

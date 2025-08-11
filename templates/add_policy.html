@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Add New Policy for {{ client.name }}</h2>
+  <form method="post">
+    <label for="policy_number">Policy Number:</label><input type="text" id="policy_number" name="policy_number">
+    <label for="vehicle_number">Vehicle Number:</label><input type="text" id="vehicle_number" name="vehicle_number">
+    <label for="vehicle_type">Vehicle Type:</label><input type="text" id="vehicle_type" name="vehicle_type">
+    <label for="agency">Agency:</label>
+    <select id="agency" name="agency">
+        <option value="">-- Select Agency --</option>
+        {% for agency in agencies %}<option value="{{ agency.name }}">{{ agency.name }}</option>{% endfor %}
+    </select>
+    <label for="policy_type">Policy Type:</label><input type="text" id="policy_type" name="policy_type">
+    <label for="insurance_company">Insurance Company:</label>
+    <select id="insurance_company" name="insurance_company">
+        <option value="">-- Select Company --</option>
+        {% for company in insurance_companies %}<option value="{{ company }}">{{ company }}</option>{% endfor %}
+    </select>
+    <label for="premium">Premium:</label><input type="number" step="0.01" id="premium" name="premium">
+    <label for="policy_start_date">Policy Start Date:</label><input type="date" id="policy_start_date" name="policy_start_date">
+    <label for="policy_end_date">Policy End Date:</label><input type="date" id="policy_end_date" name="policy_end_date">
+    <label for="account_details">Account Details:</label><textarea id="account_details" name="account_details"></textarea>
+    <button type="submit">Save Policy</button>
+  </form>
+{% endblock %}
